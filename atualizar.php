@@ -4,15 +4,16 @@ $id = $_GET['id'];
 $nome = $_POST['nome'];
 $tipo = $_POST['tipo'];
 
+
 $nomeDoArquivo = $_FILES['foto']['name'];
 $partes = explode(".", $nomeDoArquivo);
-$nomeDoArquivo = round(microtime(true)) . "." . end($partes);
+$nomeNovo = round(microtime(true)) . "." . end($partes);
 $pasta = "img/";
-move_uploaded_file($_FILES['foto']['tmp_name'], $pasta . $nomeDoArquivo);
+move_uploaded_file($_FILES['foto']['tmp_name'], $pasta . $nomeNovo);
 
 if($nomeDoArquivo != ""){
 
-$sql = "update tb_pokemon set nome='$nome', tipo='$tipo', foto='$foto' where id = $id";
+$sql = "update tb_pokemon set nome='$nome', tipo='$tipo', foto='$nomeNovo' where id = $id";
 }else{
     $sql = "update tb_pokemon set nome='$nome', tipo='$tipo' where id = $id";
 }
